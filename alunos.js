@@ -1,35 +1,43 @@
 const readline = require('readline-sync');
 
-let gerador_matricula = 2;
+// class aluno{
+//   constructor(login, senha, turma) {
+//   this.login = this.login;
+//   this.senha = this.senha;
+//   }
+// }
 
+
+let cadastroDeMatricula = 2;
 const aluno1 = {
-  matricula: 1,
-  nome: "Ana Melo",
-  telefone: "81 99999-0596",
-  email: "aluna@aluno.com",
+  login: "aluna@aluno.com",
   senha: "1234",
-  turma: "sábado iniciante",
+  matricula: 1,
+  nome: "Ana Marinho",
+  telefone: "81 98888-9997",
+  turma: "Sábado iniciante",
 };
 const aluno2 = {
+  login: "aluno@aluno.com",
+  senha: "5678",
   matricula: 2,
   nome: "João Soares",
-  telefone: "81 98888-0596",
-  email: "aluno@aluno.com",
-  senha: "5678",
-  turma: "domingo iniciante",
+  telefone: "81 99999-9998",
+  turma: "Domingo iniciante",
 };
 
 const alunos = [aluno1, aluno2];
-let loop = true;
-let alunoBusca;
+
 
 
 // MENU DO ALUNO
+let loop = true;
+let alunoBusca;
 while (loop) {
 	console.log('\n********** ÁREA DO ALUNO: **********');
 	console.log('\nOPÇÃO:');
 	console.log('1. Cadastrar acesso:');
-	console.log('2. Exibir dados cadastrados:');
+	console.log('2. Exibir informações cadastradas:');
 	console.log('3. Buscar um instrumento:');
 	console.log('4. Alterar cadastro:');
 	console.log('5. Excluir cadastro:');
@@ -39,24 +47,17 @@ while (loop) {
 
     switch (opcao) {
         
-        //OPÇAO 1. CREATE - (O ALUNO CADASTRAR SEUS DADOS NO SISTEMA)
+        //OPÇAO 1. CREATE - (O ALUNO CADASTRAR SEUS ACESSO NO SISTEMA)
         case 1:
-        let nomeAluno = readline.question("Digite seu nome:");
-        let telefoneAluno = readline.question("Digite seu telefone de contato (preferência o do Whatsapp):");
-        let turmaAluno = readline.questionInt(`Qual sua turma: (1)- Sábado iniciante, (2)- Sábado avançado, (3)- Domingo iniciante, (4)- Domingo avançado `);
         let emailAluno = readline.question("Digite seu melhor e-mail:");
         let senhaAluno = readline.question("Crie uma senha com 4 números:");
-        gerador_matricula++;
+        cadastroDeMatricula++;
         const aluno = {
-        matricula: gerador_matricula,
-        nome: nomeAluno,
-        telefone: telefoneAluno,
-        email: emailAluno,
+        login: emailAluno,
         senha: senhaAluno,
-        turma: turmaAluno,
         };
         alunos.push(aluno);
-        console.log("Aluno cadastrado com sucesso!");
+        console.log("Cadastro feito com sucesso!");
         readline.keyInPause();
         break;
 
@@ -64,41 +65,66 @@ while (loop) {
         case 2:
         alunoBusca = readline.question("Digite seu e-mail:");
         for (const a of alunos) {
-            if (a.email === alunoBusca) {
+            if (a.login === alunoBusca) {
             console.log("Resultado da busca");
             console.log("------------------------");
             console.log(`Matricula: ${a.matricula}`);
             console.log(`Nome: ${a.nome}`);
             console.log(`Telefone: ${a.telefone}`);
-            console.log(`E-mail: ${a.email}`);
+            console.log(`E-mail: ${a.login}`);
             console.log(`Turma: ${a.turma}`);   
             }
         }
+        
           readline.keyInPause();
           break;
+        
+        // OPÇAO 3. BUSCAR UM INSTRUMENTO - (O ALUNO SABER SE O INSTRUMENTO ESTA DISPONÍVEL)
 
         // OPÇAO 4. UPDATE - (O ALUNO ALTERAR SEU CADASTRO NO SISTEMA)  
         case 4:
+            alunoBusca = readline.question("Digite seu e-mail: ");
+          for (const a of alunos) {
+            if (a.login === alunoBusca) {
+            while (true) {
+              try {
+                let alterarDados = readline.questionInt(`Qual opção você quer alterar: (1) Telefone, (2) E-mail, (3) Senha: `);
+                if (alterarDados == 1) {
+                  a.telefone = readline.questionInt(`Digite o telefone: `);
+                }
+                else if (alterarDados == 2) {
+                  a.login = readline.question(`Digite o e-mail: `);
+                }
+                else if (alterarDados == 3) {
+                  a.senha = readline.questionInt(`Digite uma nova senha com 4 números: `);
+                }
+              } catch (e){ 
+                console.log("Digite apenas as opções citadas. "); 
+              }
+
+              try {
+                let finalizarAlteracao = readlineSync.question('Deseja finalizar a alteração? Digite S para Encerrar a Eleição ou N para Continuar a Eleição:');
+        if (finalizarAlteracao != 'S'){
+            throw Error ('Digite novamente:');
+        }
+
+        if (finalizarAlteracao = 'S'){
+          console.log("Cadastro alterado com sucesso!");
+              } 
+            } catch (e) {
+              console.log('Digite qual opção novamente:');   
+          } 
+          } 
+        }
+       } readline.keyInPause();
+        break;
+        
+
+        // OPÇAO 5. DELETE - (O ALUNO EXCLUIR SEU CADASTRO NO SISTEMA)  
+        case 5:
             alunoBusca = readline.questionInt("Digite seu e-mail: ");
           for (const a of alunos) {
-            if (a.email === alunoBusca) {
-              console.log(a.nome);
-              for (let i = 0; i < a.telefone.length; i++) {
-                a.telefone[i] = readline.questionInt(`Digite o telefone ${i + 1}: `);
-                a.email[i] = readline.question(`Digite o e-mail ${i + 1}: `);
-                a.senha[i] = readline.questionInt(`Digite uma nova senha ${i + 1}: `);
-                }
-            }
-          }
-          console.log("Cadastro alterado com sucesso!");
-          readline.keyInPause();
-          break;
-
-        // OPÇAO 5. DELETE - (O ALUNO APAGAR SEU CADASTRO NO SISTEMA)  
-        case 5:
-            alunoBusca = readline.questionInt("Matricula do aluno que deseja alterar: ");
-          for (const a of alunos) {
-            if (a.matricula === alunoBusca) {
+            if (a.login === alunoBusca) {
               console.log(a.nome);
               console.log(`Excluido aluno ${a.nome} do sistema..."`);
               alunos.splice(a, 1);
