@@ -10,23 +10,20 @@ const readline = require('readline-sync');
 // }
 
 const aluno1 = {
+  matricula = 1;
   nome: "Ana Marinho",
   telefone: "81 98888-9997",
   email: "aluna@aluno.com",
   turma: "Sábado iniciante",
 };
-const aluno2 = {
-  nome: "João Soares",
-  telefone: "81 99999-9998",
-  email: "aluno@aluno.com",
-  turma: "Domingo iniciante",
-};
 
-const alunos = [aluno1, aluno2];
+const bancoDeAlunos = [aluno1];
 
 // MENU DO ALUNO
 let loop = true;
 let alunoBusca;
+let matriculaAluno;
+
 while (loop) {
 	console.log('\n********** ÁREA DO ALUNO: **********');
 	console.log('\nOPÇÃO:');
@@ -45,16 +42,18 @@ while (loop) {
     let nomeAluno = readline.question("Digite seu nome:");
     let telefoneAluno = readline.questionInt("Digite seu telefone:");
     let emailAluno = readline.question("Digite seu melhor e-mail:");
-    let turmaAluno = readline.questionInt("Qual sua turma? (1)- Sábado iniciante (2)- Sábado avançado (3)- Domingo iniciante (4)- Domingo avançado");
-    
+    let turmaAluno = readline.questionInt(`Qual sua turma? (1)- Sábado iniciante (2)- Sábado avançado, (3)- Domingo iniciante, (4)- Domingo avançado`);
+    turmaAluno = 
+
     const aluno = {
+    matricula: matricula, //*****************
     nome: nomeAluno,
     telefone: telefoneAluno,
     email: emailAluno,
-    turma: turmaAluno,
+    turma: toString(turmaAluno), //*************
     };
 
-    alunos.push(aluno);
+    bancoDeAlunos.push(aluno);
     console.log("Cadastro feito com sucesso!");
     readline.keyInPause();
     break;
@@ -63,7 +62,7 @@ while (loop) {
     case 2:
       console.log("Listando todos os alunos");
       console.log("------------------------");
-      for (const a of alunos) {
+      for (const a of bancoDeAlunos) {
         console.log(`Nome: ${a.nome}`);
         console.log(`Telefone: ${a.telefone}`);
         console.log(`E-mail: ${a.email}`);
@@ -76,7 +75,7 @@ while (loop) {
     // OPÇAO 3. BUSCAR - (BUSCA UM ALUNO DO SISTEMA)
     case 3:
     alunoBusca = readline.question("Digite nome do aluno: ");
-      for (const a of alunos) {
+      for (const a of bancoDeAlunos) {
         if (a.nome === alunoBusca) {
           console.log("Resultado da busca");
           console.log("------------------------");
@@ -92,7 +91,7 @@ while (loop) {
     // OPÇAO 4. UPDATE - (ALTERAR INFORMAÇOES DO CADASTRO NO SISTEMA)  
     case 4:
       alunoBusca = readline.question("Digite nome do aluno: ");
-        for (const a of alunos) {
+        for (const a of bancoDeAlunos) {
           if (a.nome === alunoBusca) {
           while (true) {
             try {
@@ -120,7 +119,7 @@ while (loop) {
       // OPÇAO 5. DELETE - (EXCLUIR O ALUNO DO CADASTRO NO SISTEMA)  
       case 5:
       alunoBusca = readline.question("Digite nome do aluno: ");
-        for (const a of alunos) {
+        for (const a of bancoDeAlunos) {
           if (a.nome === alunoBusca) {
             console.log(a.nome);
             console.log(`Excluido aluno ${a.nome} do sistema..."`);
