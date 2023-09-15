@@ -1,28 +1,26 @@
 const readline = require('readline-sync');
 
 // class aluno{
-//   constructor(login, senha, turma) {
-//   this.login = this.login;
-//   this.senha = this.senha;
+//   constructor(nome, telefone, email, turma) {
+//   this.nome = this.nome;
+//   this.telefone = this.telefone;
+//   this.email = this.email;
+//   this.turma = this.turma;
 //   }
 // }
 
 
 let cadastroDeMatricula = 2;
 const aluno1 = {
-  login: "aluna@aluno.com",
-  senha: "1234",
-  matricula: 1,
   nome: "Ana Marinho",
   telefone: "81 98888-9997",
+  email: "aluna@aluno.com",
   turma: "Sábado iniciante",
 };
 const aluno2 = {
-  login: "aluno@aluno.com",
-  senha: "5678",
-  matricula: 2,
   nome: "João Soares",
   telefone: "81 99999-9998",
+  email: "aluno@aluno.com",
   turma: "Domingo iniciante",
 };
 
@@ -47,14 +45,18 @@ while (loop) {
 
     switch (opcao) {
         
-        //OPÇAO 1. CREATE - (O ALUNO CADASTRAR SEUS ACESSO NO SISTEMA)
+        //OPÇAO 1. CREATE - (CADASTRO DO ALUNO NO SISTEMA)
         case 1:
+        let nomeAluno = readline.question("Digite seu nome:");
+        let telefoneAluno = readline.questionInt("Digite seu telefone:");
         let emailAluno = readline.question("Digite seu melhor e-mail:");
-        let senhaAluno = readline.question("Crie uma senha com 4 números:");
+        let turmaAluno = readline.questionInt("Qual sua turma? (1)- Sábado iniciante (2)- Sábado avançado (3)- Domingo iniciante (4)- Domingo avançado");
         cadastroDeMatricula++;
         const aluno = {
-        login: emailAluno,
-        senha: senhaAluno,
+        nome: nomeAluno,
+        telefone: telefoneAluno,
+        email: emailAluno,
+        turma: turmaAluno,
         };
         alunos.push(aluno);
         console.log("Cadastro feito com sucesso!");
