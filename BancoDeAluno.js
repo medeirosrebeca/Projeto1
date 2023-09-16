@@ -58,7 +58,7 @@ let nomeAluno = readline.question("Digite seu nome:");
        bancoDeAlunos.push(aluno);
        console.log("Cadastro feito com sucesso!");
        readline.keyInPause();
-       break;
+       
 
 // Método para listar Aluno - READ
   if (bancoDeAlunos.length === 0) {
@@ -76,7 +76,7 @@ let nomeAluno = readline.question("Digite seu nome:");
   }
   }
   readline.keyInPause();
-  break;
+  
 
 //Método para buscar Aluno 
   alunoBusca = readline.questionInt("Digite matricula do aluno: ");
@@ -98,7 +98,7 @@ let nomeAluno = readline.question("Digite seu nome:");
         console.log("Aluno não encontrado.");
       }
       readline.keyInPause();
-      break;
+      
 
 //Método para alterar um aluno
   alunoBusca = readline.questionInt("Digite matrícula do aluno: ");
@@ -133,7 +133,7 @@ let nomeAluno = readline.question("Digite seu nome:");
         console.log("Aluno não encontrado.");
       }
       readline.keyInPause();
-      break;
+      
 
 //Método para deletar um Aluno
   alunoBusca = readline.questionInt("Digite matrícula do aluno: ");
@@ -151,6 +151,6 @@ let nomeAluno = readline.question("Digite seu nome:");
     console.log("Aluno não encontrado.");
   }
   readline.keyInPause();
-  break;
+  
 
 export {BancoDeAluno};
